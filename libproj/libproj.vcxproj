@@ -139,8 +139,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Lab1PartB.cpp" />
+    <ClCompile Include="Lab1PartC.cpp" />
     <ClCompile Include="library.cpp" />
-    <ClCompile Include="test.cpp" />
+    <ClCompile Include="Lab1PartA.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="library.h" />

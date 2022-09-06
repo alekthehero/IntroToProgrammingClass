@@ -16,6 +16,9 @@
     <Filter Include="Source Files\Lab1">
       <UniqueIdentifier>{dd857b8a-2296-4eb1-89bd-b2ef839f6a08}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Lab2">
+      <UniqueIdentifier>{f7a9d0c1-d220-468e-a76e-c608e87e5923}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="library.cpp">
@@ -30,9 +33,18 @@
     <ClCompile Include="Lab1PartC.cpp">
       <Filter>Source Files\Lab1</Filter>
     </ClCompile>
+    <ClCompile Include="Tester.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Lab2.cpp">
+      <Filter>Source Files\Lab2</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="library.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MainTester.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

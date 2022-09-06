@@ -1,4 +1,5 @@
 #include "library.h"
+#include "MainTester.h"
 
 //constants
 const double pi = 3.14159265358979323846;
@@ -27,7 +28,8 @@ void DrawCircle(int steps, int segmentLen) {
 	}	
 }
 
-void main() {
+//Main function, gets called from the tester file where void main is
+ void Lab1PartC() {
 	//Make the window to draw on
 	
 	make_window(800, 800);

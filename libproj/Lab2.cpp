@@ -23,6 +23,9 @@ void drawStar(const int x, const int y, const int length) {
 	move_to(x, y);
 	//draw it
 	
+	// USE turn_right_by_degrees();
+
+
 	//top right
 	set_heading_degrees(180 - 36);
 	draw_distance(length);

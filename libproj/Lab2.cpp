@@ -1,6 +1,8 @@
 #include "library.h"
 #include "MainTester.h"
 
+//global scale variable for length
+const double scale = 1.0;
 
 //Main function called from tester.cpp
 void Lab2() {
@@ -18,46 +20,55 @@ void Lab2() {
 * @param length The segment length for each line on the star
 *
 */
-void drawStar(const int x, const int y, const int length) {
+void drawStar(const int x, const int y, int length) {
+	length = length * scale;
 	//set starting pos
 	move_to(x, y);
 	//draw it
 	
 	// USE turn_right_by_degrees();
+	//36* for points 108* for shoulders
 
-
-	//top right
-	set_heading_degrees(180 - 36);
+	//top middle
+	set_heading_degrees(180);
+	turn_left_by_degrees(36 / 2);
 	draw_distance(length);
-	//right upper
+	//inner top right
 	set_heading_degrees(90);
 	draw_distance(length);
-	//right top point to middle
-	set_heading_degrees(270 - 36);
+	//top right point
+	set_heading_degrees(270);
+	turn_left_by_degrees(36);
 	draw_distance(length);
-	//right middle to bottom right point
-	set_heading_degrees(180 - 36);
+	//inner bottom right
+	set_heading_degrees(180);
+	turn_left_by_degrees(36 / 2);
 	draw_distance(length);
-
-	//bottom right point to middle bottom
-	set_heading_degrees(180 + 108);
+	//bottom right
+	set_heading_degrees(get_heading_degrees()-180);
+	turn_left_by_degrees(36);
 	draw_distance(length);
-	//middle bottom to bottom left point
-	set_heading_degrees(288-36);
+	//middle bottom to bottom left
+	turn_left_by_degrees(180-108);
 	draw_distance(length);
-
-	//bottom left point to middle left
-	set_heading_degrees(36);
+	//bottom left to middle left
+	set_heading_degrees(get_heading_degrees() - 180);
+	turn_left_by_degrees(36);
 	draw_distance(length);
-	//middle left to top left point
-	set_heading_degrees(270+36);
+	//middle left to top left
+	turn_left_by_degrees(180 - 108);
 	draw_distance(length);
-	//top left point to top left middle
+	//top left to top middle left
 	set_heading_degrees(90);
 	draw_distance(length);
-	//top left middle to top middle point
-	set_heading_degrees(36);
+	//top middle left to top middle
+	set_heading_degrees(0);
+	turn_right_by_degrees(36/2);
 	draw_distance(length);
+
+
+
+	
 
 
 }

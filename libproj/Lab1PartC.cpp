@@ -2,11 +2,11 @@
 #include "MainTester.h"
 
 //constants
-const double pi = 3.14159265358979323846;
+const double pi = acos(-1.0);
 
 
-void DrawCircle(int steps, int segmentLen) {
-	move_to(400-(segmentLen)/2/*Do this to put cirlce in middle of x = 400*/, 200);
+void drawCircle(int x, int y, int steps, int segmentLen) {
+	move_to(x-(segmentLen)/2/*Do this to put cirlce in middle of given x*/, y);
 	//Loop for sharpness of circle
 	for (int step = 0; step <= steps; step++) {
 		//get the progress around circle
@@ -40,7 +40,7 @@ void DrawCircle(int steps, int segmentLen) {
 	//Make Person
 
 	//draw head
-	DrawCircle(20, 16);
+	drawCircle(400, 200, 20, 16);
 
 	//Draw Back
 	move_relative(8,0);

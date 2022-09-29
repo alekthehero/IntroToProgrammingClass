@@ -60,8 +60,76 @@ void asciArt(int a, int b) {
 
 #pragma region C2
 
-void drawCannon(int x, int y, int angle) {
-	drawCircle(x, y, 20, 15);
+void drawCannon(int x, int y, double a) {
+	/*G is the point on the ground where the wheel rests.Its coordinates are(xg, yg).
+	C is the exact position of the axle, its coordinates are(xc, yc).
+	P is the easiest point to start drawing the body of the cannon from, coordinates(xp, yp).
+	E is the point where the ball pops out when it is fired, coordinates(xe, ye).*/
+	double pi = acos(-1.0);
+	double radius = 30;
+	double xGround = x;
+	double yGround = y;
+	double xAxle = xGround;
+	double yAxle = yGround - radius;
+	double xCannon;
+	double yCannon;
+	double xFirePoint;
+	double yFirePoint;
+	//dimensions of the cannon
+	double widthBackOfCannon = 70;
+	double widthFrontOfCannon = 60;
+	double lengthBackToAxle = 40;
+	double lengthAxleToFront = 260;
+
+	//drawing the shape of the cannon we need the base angle
+	double drawnCannonAngle = asin(
+		(widthBackOfCannon - widthFrontOfCannon)
+		/ 2 /
+		(lengthBackToAxle + lengthAxleToFront)
+	);
+
+	//calculate where to start drawing the cannon
+	xCannon = -(xAxle - lengthBackToAxle) * sin(a - drawnCannonAngle);
+	yCannon = -(yAxle + lengthBackToAxle) * cos(a - drawnCannonAngle);
+
+	//get the overall length of the cannon
+	double length = (lengthBackToAxle + lengthAxleToFront) * cos(drawnCannonAngle);
+
+	//find where the cannon ball shoots
+	
+	//get distence between draw cannon point and where the ball shoots
+	double distenceToFiringPoint = sqrt((length * length) + (widthBackOfCannon * widthBackOfCannon) / 4);
+	//get angle between the two
+	double firingAngle = asin(widthBackOfCannon / 2 / distenceToFiringPoint);
+
+	//now we can calculate the firing location
+	xFirePoint = xCannon + distenceToFiringPoint * sin(a - firingAngle);
+	yFirePoint = yCannon - distenceToFiringPoint * cos(a - firingAngle);
+
+	//Now actually draw the cannon
+	set_pen_width(10);
+	set_pen_color(color::red);
+	draw_point(xCannon, yCannon);
+	set_pen_color(color::orange);
+	draw_point(xAxle, yAxle);
+	set_pen_color(color::black);
+	set_pen_width(2);
+
+	//draw the circle first given its center point
+	for (double angle = 0; angle <= 2 * pi; angle += 0.01) {
+		draw_point(xAxle + radius * cos(angle), yAxle + radius * sin(angle));
+	}
+	
+	//draw cannon now
+	move_to(xCannon, yCannon);
+	set_heading_degrees(90 - (a - ((drawnCannonAngle * (180 / pi)) * a)));
+	draw_distance(length - lengthBackToAxle);
+	move_distance(radius*2);
+	draw_distance(lengthAxleToFront);
+	
+
+	
+
 }
 
 #pragma endregion

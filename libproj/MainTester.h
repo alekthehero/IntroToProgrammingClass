@@ -21,5 +21,5 @@ void count(int a, int b);
 int countUpBy5(int a, int b);
 void dotsStarsDots(int d1, int s1, int d2);
 void asciArt(int a, int b);
-void drawCannon(int x, int y, double a);
+void drawCannon(int x, int y, double angle);
 #endif

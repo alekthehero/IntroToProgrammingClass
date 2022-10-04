@@ -4,7 +4,7 @@
 //Main function called from tester.cpp
 void Lab3() {
 	make_window(800, 800);
-	drawCannon(400, 400, 60);
+	drawCannon(400, 400, 80);
 }
 
 #pragma region A1
@@ -60,12 +60,13 @@ void asciArt(int a, int b) {
 
 #pragma region C2
 
-void drawCannon(int x, int y, double a) {
+void drawCannon(int x, int y, double angle) {
+	double pi = acos(-1.0);
 	/*G is the point on the ground where the wheel rests.Its coordinates are(xg, yg).
 	C is the exact position of the axle, its coordinates are(xc, yc).
 	P is the easiest point to start drawing the body of the cannon from, coordinates(xp, yp).
 	E is the point where the ball pops out when it is fired, coordinates(xe, ye).*/
-	double pi = acos(-1.0);
+	double a = angle*(pi / 180);
 	double radius = 30;
 	double xGround = x;
 	double yGround = y;
@@ -76,10 +77,10 @@ void drawCannon(int x, int y, double a) {
 	double xFirePoint;
 	double yFirePoint;
 	//dimensions of the cannon
-	double widthBackOfCannon = 70;
+	double widthBackOfCannon = 80;
 	double widthFrontOfCannon = 60;
-	double lengthBackToAxle = 40;
-	double lengthAxleToFront = 260;
+	double lengthBackToAxle = 70;
+	double lengthAxleToFront = 240;
 
 	//drawing the shape of the cannon we need the base angle
 	double drawnCannonAngle = asin(
@@ -89,8 +90,8 @@ void drawCannon(int x, int y, double a) {
 	);
 
 	//calculate where to start drawing the cannon
-	xCannon = -(xAxle - lengthBackToAxle) * sin(a - drawnCannonAngle);
-	yCannon = -(yAxle + lengthBackToAxle) * cos(a - drawnCannonAngle);
+	xCannon = xAxle - lengthBackToAxle * sin(a - drawnCannonAngle);
+	yCannon = yAxle + lengthBackToAxle * cos(a - drawnCannonAngle);
 
 	//get the overall length of the cannon
 	double length = (lengthBackToAxle + lengthAxleToFront) * cos(drawnCannonAngle);
@@ -98,7 +99,7 @@ void drawCannon(int x, int y, double a) {
 	//find where the cannon ball shoots
 	
 	//get distence between draw cannon point and where the ball shoots
-	double distenceToFiringPoint = sqrt((length * length) + (widthBackOfCannon * widthBackOfCannon) / 4);
+	double distenceToFiringPoint = sqrt(length * length + widthBackOfCannon * widthBackOfCannon / 4);
 	//get angle between the two
 	double firingAngle = asin(widthBackOfCannon / 2 / distenceToFiringPoint);
 
@@ -112,6 +113,8 @@ void drawCannon(int x, int y, double a) {
 	draw_point(xCannon, yCannon);
 	set_pen_color(color::orange);
 	draw_point(xAxle, yAxle);
+	set_pen_color(color::cyan);
+	draw_point(xFirePoint, yFirePoint);
 	set_pen_color(color::black);
 	set_pen_width(2);
 
@@ -122,10 +125,17 @@ void drawCannon(int x, int y, double a) {
 	
 	//draw cannon now
 	move_to(xCannon, yCannon);
-	set_heading_degrees(90 - (a - ((drawnCannonAngle * (180 / pi)) * a)));
-	draw_distance(length - lengthBackToAxle);
+	set_heading_radians(a);
+	//set_heading_degrees(90 - (a - ((drawnCannonAngle * (180 / pi)) * a)));
+	draw_distance(lengthBackToAxle-radius);
 	move_distance(radius*2);
-	draw_distance(lengthAxleToFront);
+	draw_distance(lengthAxleToFront-radius);
+	turn_left_by_degrees(90);
+	draw_distance(widthFrontOfCannon);
+	turn_left_by_degrees(86);
+	draw_distance(length);
+	turn_left_by_degrees(94);
+	draw_distance(widthBackOfCannon);
 	
 
 	

@@ -6,6 +6,7 @@ void Lab1PartB();
 void Lab1PartC();
 void Lab2();
 void Lab3();
+void Lab4();
 
 //Lab 1
 void drawCircle(int x, int y, int steps, int segmentLen);
@@ -22,4 +23,9 @@ int countUpBy5(int a, int b);
 void dotsStarsDots(int d1, int s1, int d2);
 void asciArt(int a, int b);
 void drawCannon(int x, int y, double angle);
+
+//Lab 4
+struct FiringPoint;
+FiringPoint drawCannonAndReturnFiringPoint(int x, int y, double angle);
+void drawFiringLine(int xLoc, int yLoc, double velocity);
 #endif

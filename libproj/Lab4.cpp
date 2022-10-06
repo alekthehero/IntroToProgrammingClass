@@ -1,72 +1,56 @@
-#include "library.h"
+﻿#include "library.h"
 #include "MainTester.h"
 
+
+//structure so that draw cannon can return the firing point when called
+struct FiringPoint
+{
+	int x;
+	int y;
+	FiringPoint(int xLoc, int yLoc) {
+		x = xLoc;
+		y = yLoc;
+	}
+};
+
+int angle = 60;
 //Main function called from tester.cpp
-void Lab3() {
+void Lab4() {
+	//h(meters) = v(meters/second)t(seconds) ‐ 1/2(9.807)t^2
 	make_window(800, 800);
-	drawCannon(400, 400, 80);
+	FiringPoint firePoint(0, 0);
+	firePoint = drawCannonAndReturnFiringPoint(150, 700, angle);
+	drawFiringLine(firePoint.x, firePoint.y, 100);
 }
 
-#pragma region A1
-void count(int a, int b) {
-	cout << "Count from A to B\nStarting count: " << a;
-	for (int x = a; x <= b; x++) {
-		cout << "\nCurrent Count: " << x;
-	}
-}
-#pragma endregion
 
-#pragma region A2
-int countUpBy5(int a, int b) {
-	if (a <= b) {
-		cout << "\nCount from A, in pounds: " << a << " to B in Increments of 5\nCurrent conversion: " << a* 0.45359237;
-		a += 5;
-		return countUpBy5(a, b);
-	}
-	else {
-		return 0;
-	}
-}
-//Conversion one lb pound is 0.45359237 kg.
 
-#pragma endregion
+#pragma region Draw firing line
+const double g = 9.807;
+void drawFiringLine(int xLoc, int yLoc, double velocity) {
+	double y;
 
-#pragma region B5
-
-void dotsStarsDots(int d1, int s1, int d2) {
-
-	for (int dots = 0; dots < d1; dots++){
-		print(".");
+	for (double seconds = 1; seconds <= (2*velocity)/g; seconds += .05){
+		y = (velocity * seconds*cos((angle*(acos(-1)/180))) - (.5 * g * pow(seconds, 2)));
+		set_pen_width(5);
+		set_pen_color(color::pink);
+		draw_point(xLoc+(seconds*20), yLoc-y+100);
 	}
-	for (int stars = 0; stars < s1; stars++){
-		print("*");
-	}
-	for (int dots = 0; dots < d2; dots++){
-		print(".");
-	}
-	print("\n");
 
-}
-
-void asciArt(int a, int b) {
-	//cound down to 1 from a
-	for (int i = a; i > 1; i--){
-		dotsStarsDots(i, b, i);
-		b = b + 2;
-	}
 }
 
 #pragma endregion
 
-#pragma region C2
 
-void drawCannon(int x, int y, double angle) {
+#pragma region drawCannon Edit
+
+FiringPoint drawCannonAndReturnFiringPoint(int x, int y, double angle) {
 	double pi = acos(-1.0);
 	/*G is the point on the ground where the wheel rests.Its coordinates are(xg, yg).
 	C is the exact position of the axle, its coordinates are(xc, yc).
 	P is the easiest point to start drawing the body of the cannon from, coordinates(xp, yp).
 	E is the point where the ball pops out when it is fired, coordinates(xe, ye).*/
-	double a = angle*(pi / 180);
+	double a = angle * (pi / 180);
 	double radius = 30;
 	double xGround = x;
 	double yGround = y;
@@ -97,7 +81,7 @@ void drawCannon(int x, int y, double angle) {
 	double length = (lengthBackToAxle + lengthAxleToFront) * cos(drawnCannonAngle);
 
 	//find where the cannon ball shoots
-	
+
 	//get distence between draw cannon point and where the ball shoots
 	double distenceToFiringPoint = sqrt(length * length + widthBackOfCannon * widthBackOfCannon / 4);
 	//get angle between the two
@@ -122,24 +106,26 @@ void drawCannon(int x, int y, double angle) {
 	for (double angle = 0; angle <= 2 * pi; angle += 0.01) {
 		draw_point(xAxle + radius * cos(angle), yAxle + radius * sin(angle));
 	}
-	
+
 	//draw cannon now
 	move_to(xCannon, yCannon);
 	set_heading_radians(a);
 	//set_heading_degrees(90 - (a - ((drawnCannonAngle * (180 / pi)) * a)));
-	draw_distance(lengthBackToAxle-radius);
-	move_distance(radius*2);
-	draw_distance(lengthAxleToFront-radius);
+	draw_distance(lengthBackToAxle - radius);
+	move_distance(radius * 2);
+	draw_distance(lengthAxleToFront - radius);
 	turn_left_by_degrees(90);
 	draw_distance(widthFrontOfCannon);
 	turn_left_by_degrees(86);
 	draw_distance(length);
 	turn_left_by_degrees(94);
 	draw_distance(widthBackOfCannon);
-	
 
-	
+	//set a structure to return the xy position of a firing point
+	FiringPoint returnFiring(xFirePoint, yFirePoint);
+	return returnFiring;
 
 }
+
 
 #pragma endregion

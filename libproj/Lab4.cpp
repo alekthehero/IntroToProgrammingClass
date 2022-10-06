@@ -13,28 +13,60 @@ struct FiringPoint
 	}
 };
 
-int angle = 60;
+int angle;
 //Main function called from tester.cpp
 void Lab4() {
+	
+	//get user input
+	cout << "Enter angle to fire at (0-90): ";
+	angle = read_int();
+	cout << "Enter velocity to fire at (50-200): ";
+	double velocity = read_double();
 	//h(meters) = v(meters/second)t(seconds) ‐ 1/2(9.807)t^2
-	make_window(800, 800);
+	make_window(1800, 800);
+	//Attempt 1
+	drawHQ(random_in_range(1000,1600));
 	FiringPoint firePoint(0, 0);
-	firePoint = drawCannonAndReturnFiringPoint(150, 700, angle);
-	drawFiringLine(firePoint.x, firePoint.y, 100);
+	firePoint = drawCannonAndReturnFiringPoint(150, 700, angle-15);
+	drawFiringLine(firePoint.x, firePoint.y, velocity);
+	//Attempt 2
+	cout << "Enter angle to fire at (0-90): ";
+	angle = read_int();
+	cout << "Enter velocity to fire at (50-200): ";
+	FiringPoint firePoint2(0, 0);
+	firePoint2 = drawCannonAndReturnFiringPoint(150, 700, angle - 15);
+	velocity = read_double();
+	drawFiringLine(firePoint.x, firePoint.y, velocity);
+	//Attempt 3
+	cout << "Enter angle to fire at (0-90): ";
+	angle = read_int();
+	cout << "Enter velocity to fire at (50-200): ";
+	FiringPoint firePoint3(0, 0);
+	firePoint3 = drawCannonAndReturnFiringPoint(150, 700, angle - 15);
+	velocity = read_double();
+	drawFiringLine(firePoint.x, firePoint.y, velocity);
 }
 
+void drawHQ(int x) {
+	move_to(x, 800);
+	draw_to(x+200, 800);
+	draw_to(x+200, 700);
+	draw_to(x, 700);
+	draw_to(x, 800);
+}
 
 
 #pragma region Draw firing line
 const double g = 9.807;
 void drawFiringLine(int xLoc, int yLoc, double velocity) {
 	double y;
+	move_to(xLoc, yLoc);
 
-	for (double seconds = 1; seconds <= (2*velocity)/g; seconds += .05){
-		y = (velocity * seconds*cos((angle*(acos(-1)/180))) - (.5 * g * pow(seconds, 2)));
+	for (double seconds = 0; seconds <= (2*velocity)/g; seconds += 1){
+		y = (velocity * seconds*cos(((angle)*(acos(-1)/180)))) - (.5 * g * pow(seconds, 2));
 		set_pen_width(5);
 		set_pen_color(color::pink);
-		draw_point(xLoc+(seconds*20), yLoc-y+100);
+		draw_to(xLoc+(seconds*angle), yLoc - y);
 	}
 
 }

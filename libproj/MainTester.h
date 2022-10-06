@@ -28,4 +28,5 @@ void drawCannon(int x, int y, double angle);
 struct FiringPoint;
 FiringPoint drawCannonAndReturnFiringPoint(int x, int y, double angle);
 void drawFiringLine(int xLoc, int yLoc, double velocity);
+void drawHQ(int x);
 #endif

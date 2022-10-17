@@ -7,6 +7,7 @@ void Lab1PartC();
 void Lab2();
 void Lab3();
 void Lab4();
+void Lab5();
 
 //Lab 1
 void drawCircle(int x, int y, int steps, int segmentLen);
@@ -29,4 +30,7 @@ struct FiringPoint;
 FiringPoint drawCannonAndReturnFiringPoint(int x, int y, double angle);
 void drawFiringLine(int xLoc, int yLoc, double velocity);
 void drawHQ(int x);
+
+//Lab 5
+void drawClock();
 #endif

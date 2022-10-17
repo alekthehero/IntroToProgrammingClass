@@ -2,5 +2,5 @@
 #include "MainTester.h"
 
 void main() {
-	Lab4();
+	Lab5();
 }

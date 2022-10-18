@@ -41,27 +41,115 @@ void drawClock() {
 
 		for (int i = 0; i <= 12; i++) {
 			if (!(angle < .523*i) && !(.524*i < angle)) {
-				cout << "Draw Tick at 20\n";
 				move_to(currX, currY);
 				draw_to(innerX, innerY);
 			}
 		}
 	}
-	//calculate degrees to time
-	double hourToDegree = 360 / 12;
-	double minuteToDegree = 360 / 60;
-	double secondToDegree = 360 / (60*60);
-	//draw hands and update them
-	//second hand
-	int secondHandDegree = 0;
-	move_to(200, 300);
-	set_pen_width(2);
-	set_heading_degrees(secondHandDegree);
-	draw_distance(120);
-	//minute hand
-	int minuteHandDegree = 0;
-	move_to(200, 300);
-	set_heading_degrees(minuteHandDegree);
-	draw_distance(120);
+	//draw time and date
 
+
+
+
+	int sleepTime = 20;
+	while (true) {
+		//get time
+		int calDate = get_calendar_date();
+		int year = calDate / 10000;
+		int month = calDate / 100 % 100;
+		int day = calDate % 100;
+
+		//get time
+		int timeVal = get_clock_time();
+		int hour24 = timeVal / 10000;
+		int hour12 = ((hour24 - 2) % 10);
+		int minute = timeVal / 100 % 100;
+		int second = timeVal % 100;
+
+
+		move_to(0, 100);
+		set_pen_width(40);
+		set_pen_color(color::white);
+		draw_to(400, 100);
+		//write time and date
+		if (hour24 > 12) {
+			int hour = ((hour24 - 2) % 10);
+			move_to(100, 100);
+			set_pen_color(color::black);
+			if (minute < 10) {
+				string updatedMinute = std::to_string(minute);
+				updatedMinute.insert(0, "0");
+				string print = std::to_string(hour) + ":" + updatedMinute + " p.m.";
+				write_string(print, direction::east);
+			}
+			else {
+				string print = std::to_string(hour) + ":" + std::to_string(minute) + " p.m.";
+				write_string(print, direction::east);
+				cout << "test";
+			}
+		}
+		else {
+			set_pen_color(color::black);
+			move_to(100, 100);
+			if (minute < 10) {
+				string updatedMinute = std::to_string(minute);
+				updatedMinute.insert(0, "0");
+				string print = std::to_string(hour24) + ":" + updatedMinute + " a.m.";
+				write_string(hour24 + ":" + updatedMinute, direction::east);
+			}
+			else {
+				string print = std::to_string(hour24) + ":" + std::to_string(minute) + " a.m.";
+				write_string(print, direction::east);
+			}
+		}
+
+		//update the date
+		move_to(0, 500);
+		set_pen_width(40);
+		set_pen_color(color::white);
+		draw_to(400, 500);
+
+		move_to(100, 500);
+		set_pen_color(color::black);
+		string output= "Date: " + std::to_string(year) + "-" + std::to_string(month) + "-" + std::to_string(day);
+		write_string(output);
+		
+
+
+		//calculate degrees to time
+		double hourToDegree = 360 / 12;
+		double minuteToDegree = 360 / 60;
+		double secondToDegree = 360 / 60;
+		//draw hands and update them
+		//second hand
+		int secondHandDegree = secondToDegree * second;
+		move_to(200, 300);
+		set_pen_width(2);
+		set_heading_degrees(secondHandDegree);
+		set_pen_color(color::black);
+		draw_distance(120);
+		Sleep(sleepTime);
+		set_pen_color(color::white);
+		draw_to(200, 300);
+		//minute hand
+		int minuteHandDegree = minute * minuteToDegree;
+		move_to(200, 300);
+		set_pen_width(4);
+		set_heading_degrees(minuteHandDegree);
+		set_pen_color(color::black);
+		draw_distance(100);
+		Sleep(sleepTime);
+		set_pen_color(color::white);
+		draw_to(200, 300);
+		//hour
+		int hourHandDegree = 0.5 * (hour12 * 60 + minute);
+		move_to(200, 300);
+		set_pen_width(5);
+		set_heading_degrees(hourHandDegree);
+		set_pen_color(color::black);
+		draw_distance(80);
+		Sleep(sleepTime);
+		set_pen_color(color::white);
+		draw_to(200, 300);
+	}
 }

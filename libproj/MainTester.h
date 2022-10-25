@@ -8,6 +8,7 @@ void Lab2();
 void Lab3();
 void Lab4();
 void Lab5();
+void Lab6();
 
 //Lab 1
 void drawCircle(int x, int y, int steps, int segmentLen);
@@ -33,4 +34,10 @@ void drawHQ(int x);
 
 //Lab 5
 void drawClock();
+
+//Lab 6 
+int daysLong(int year, int month);
+int dayOfTheYear(int year, int month, int day);
+int dayOfTheCentury(int year, int month, int day);
+int dayFromYearZero(int year, int month, int day);
 #endif

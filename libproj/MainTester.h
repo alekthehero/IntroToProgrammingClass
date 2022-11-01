@@ -40,4 +40,6 @@ int daysLong(int year, int month);
 int dayOfTheYear(int year, int month, int day);
 int dayOfTheCentury(int year, int month, int day);
 int dayFromYearZero(int year, int month, int day);
+int dayOfTheWeek(int year, int month, int day);
+void printOutCal(int year, int month);
 #endif

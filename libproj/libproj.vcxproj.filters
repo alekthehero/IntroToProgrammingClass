@@ -31,6 +31,9 @@
     <Filter Include="Source Files\Lab6">
       <UniqueIdentifier>{d9d08604-b1d2-4899-817f-27d1faa3997a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Lab8">
+      <UniqueIdentifier>{c51074df-08ed-427e-b971-a2afcc1792bb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="library.cpp">
@@ -62,6 +65,9 @@
     </ClCompile>
     <ClCompile Include="Lab6.cpp">
       <Filter>Source Files\Lab6</Filter>
+    </ClCompile>
+    <ClCompile Include="Lab8.cpp">
+      <Filter>Source Files\Lab8</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

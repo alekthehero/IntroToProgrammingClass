@@ -146,6 +146,7 @@
     <ClCompile Include="Lab4.cpp" />
     <ClCompile Include="Lab5.cpp" />
     <ClCompile Include="Lab6.cpp" />
+    <ClCompile Include="Lab8.cpp" />
     <ClCompile Include="library.cpp" />
     <ClCompile Include="Lab1PartA.cpp" />
     <ClCompile Include="Tester.cpp" />

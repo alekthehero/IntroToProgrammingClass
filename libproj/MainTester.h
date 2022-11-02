@@ -9,6 +9,7 @@ void Lab3();
 void Lab4();
 void Lab5();
 void Lab6();
+void Lab8();
 
 //Lab 1
 void drawCircle(int x, int y, int steps, int segmentLen);
@@ -42,4 +43,8 @@ int dayOfTheCentury(int year, int month, int day);
 int dayFromYearZero(int year, int month, int day);
 int dayOfTheWeek(int year, int month, int day);
 void printOutCal(int year, int month);
+
+//Lab 8
+void drawButton(int x, int y);
+
 #endif

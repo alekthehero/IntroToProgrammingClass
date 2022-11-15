@@ -45,6 +45,8 @@ int dayOfTheWeek(int year, int month, int day);
 void printOutCal(int year, int month);
 
 //Lab 8
-void drawButton(int x, int y);
+struct Button;
+void drawButton(Button button);
+void drawGrid();
 
 #endif

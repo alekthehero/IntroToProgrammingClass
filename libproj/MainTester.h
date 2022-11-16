@@ -10,6 +10,7 @@ void Lab4();
 void Lab5();
 void Lab6();
 void Lab8();
+void Lab9();
 
 //Lab 1
 void drawCircle(int x, int y, int steps, int segmentLen);

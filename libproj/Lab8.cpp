@@ -235,8 +235,11 @@ void drawGrid() {
 	Button squarButton = Button(xScaled * 5, yScaled + yIncrement * 3, "X^2", baseSize, 40);
 	drawButton(squarButton);
 	
+	//row above that
 	Button sinButton = Button(xScaled, yScaled + yIncrement * 4, "sin", baseSize, 40);
 	drawButton(sinButton);
+	Button cosButton = Button(xScaled * 2, yScaled + yIncrement * 4, "cos", baseSize, 40);
+	drawButton(cosButton);
 
 	//main calc loop
 	while (true) {
@@ -417,6 +420,14 @@ void drawGrid() {
 			if (sinButton.yCord - (baseSize / 2) < yClick and yClick < sinButton.yCord + (baseSize / 2)) {
 				print("clicked sin button\n");
 				updateDisplay(sinButton);
+			}
+		}
+
+		//cos button
+		if (cosButton.xCord - (baseSize / 2) < xClick and xClick < cosButton.xCord + (baseSize / 2)) {
+			if (cosButton.yCord - (baseSize / 2) < yClick and yClick < cosButton.yCord + (baseSize / 2)) {
+				print("clicked cos button\n");
+				updateDisplay(cosButton);
 			}
 		}
 
